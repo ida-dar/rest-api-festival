@@ -1,4 +1,14 @@
 module.exports = {
+  testimonials: [
+    { id: 1, author: 'John Doe', text: 'This company is worth every coin!' },
+    { id: 2, author: 'Amanda Doe', text: 'They really know how to make you happy.' },
+    { id: 3, author: 'John Doe', text: 'This company is worth every coin!' },
+    { id: 4, author: 'Amanda Doe', text: 'They really know how to make you happy.' },
+    { id: 5, author: 'John Doe', text: 'This company is worth every coin!' },
+    { id: 6, author: 'Amanda Doe', text: 'They really know how to make you happy.' },
+    { id: 7, author: 'John Doe', text: 'This company is worth every coin!' },
+    { id: 8, author: 'Amanda Doe', text: 'They really know how to make you happy.' },
+  ],
   concerts: [
     { id: 1, performer: 'John Doe', genre: 'Rock', price: 25, day: 1, image: '/img/uploads/1fsd324fsdg.jpg' },
     { id: 2, performer: 'Rebekah Parker', genre: 'R&B', price: 25, day: 1, image: '/img/uploads/2f342s4fsdg.jpg' },
