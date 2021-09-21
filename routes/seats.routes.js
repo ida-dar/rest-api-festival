@@ -17,7 +17,11 @@ router.route('/seats/:id').get((req, res) => {
 router.route('/seats').post((req, res) => {
   const { day, seat, client, email } = req.body;
 
-  if(day && seat && client && email) {
+  if(typeof(day) === 'number' &&
+    typeof(seat) === 'number' && 
+    typeof(client) === 'string' && 
+    (typeof(email) === 'string')
+  ) {
     const id = uuidv4();
     const obj = { 
       id: id, 
@@ -26,9 +30,16 @@ router.route('/seats').post((req, res) => {
       client: client,
       email: email,
     };
-    db.seats.push(obj);
+
+    const validate = db.seats.some(el => (el.day === obj.day) && (el.seat === obj.seat));
+
+    if(validate){
+      res.status(409).json({ message: 'This seat is already booked. Please select another one.' });
+    } else {
+      db.seats.push(obj);
+      res.json({ message: 'OK' });
+    }
     
-    res.json({ message: 'OK' });
   } else {
     res.json({ message: 'Something went wrong' });
   }
@@ -38,7 +49,11 @@ router.route('/seats/:id').put((req, res) => {
   const { day, seat, client, email } = req.body;
   const id = req.params.id;
 
-  if(day && seat && client && email) {
+  if(typeof(day) === 'number' &&
+    typeof(seat) === 'number' && 
+    typeof(client) === 'string' && 
+    (typeof(email) === 'string')
+  ) {
     const newData = { 
       id: id, 
       day: day, 
