@@ -7,17 +7,17 @@ router.route('/testimonials').get((req, res) => {
   res.json(db.testimonials);
 });
 
-router.route('/testimonials/:id').get((req, res) => {
-  const id = req.params.id;
-  const obj = db.testimonials.find(el => el.id === parseInt(id));
-
-  res.json(obj);
-});
-
 router.route('/testimonials/random').get((req, res) => {
   const random = db.testimonials[Math.floor(Math.random() * db.testimonials.length)];
 
   res.json(random);
+});
+
+router.route('/testimonials/:id').get((req, res) => {
+  const id = req.params.id;
+  const obj = db.testimonials.find(el => el.id.toString() === id);
+
+  res.json(obj);
 });
 
 router.route('/testimonials').post((req, res) => {
@@ -40,7 +40,7 @@ router.route('/testimonials/:id').put((req, res) => {
 
   if(author && text) {
     const newData = { id: id, author: author, text: text };
-    const objIndex = db.testimonials.findIndex((obj => obj.id == id));
+    const objIndex = db.testimonials.findIndex((obj => obj.id.toString() == id));
     db.testimonials[objIndex] = newData;
 
     res.json({ message: 'OK' });
@@ -52,7 +52,7 @@ router.route('/testimonials/:id').put((req, res) => {
 router.route('/testimonials/:id').delete((req, res) => {
   const id = req.params.id;
 
-  const objIndex = db.testimonials.findIndex((obj => obj.id == id));
+  const objIndex = db.testimonials.findIndex((obj => obj.id.toString() == id));
   db.testimonials.splice(objIndex, 1);
 
   res.json({ message: 'OK' });

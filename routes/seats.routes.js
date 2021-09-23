@@ -9,7 +9,7 @@ router.route('/seats').get((req, res) => {
 
 router.route('/seats/:id').get((req, res) => {
   const id = req.params.id;
-  const obj = db.seats.find(el => el.id === parseInt(id));
+  const obj = db.seats.find(el => el.id.toString() === id);
 
   res.json(obj);
 });
@@ -17,11 +17,7 @@ router.route('/seats/:id').get((req, res) => {
 router.route('/seats').post((req, res) => {
   const { day, seat, client, email } = req.body;
 
-  if(typeof(day) === 'number' &&
-    typeof(seat) === 'number' && 
-    typeof(client) === 'string' && 
-    (typeof(email) === 'string')
-  ) {
+  if(day && seat && client && email) {
     const id = uuidv4();
     const obj = { 
       id: id, 
@@ -49,11 +45,7 @@ router.route('/seats/:id').put((req, res) => {
   const { day, seat, client, email } = req.body;
   const id = req.params.id;
 
-  if(typeof(day) === 'number' &&
-    typeof(seat) === 'number' && 
-    typeof(client) === 'string' && 
-    (typeof(email) === 'string')
-  ) {
+  if(day && seat && client && email) {
     const newData = { 
       id: id, 
       day: day, 
@@ -61,7 +53,7 @@ router.route('/seats/:id').put((req, res) => {
       client: client,
       email: email,
     };
-    const objIndex = db.seats.findIndex((obj => obj.id == id));
+    const objIndex = db.seats.findIndex((obj => obj.id.toString() == id));
     db.seats[objIndex] = newData;
 
     res.json({ message: 'OK' });
@@ -73,7 +65,7 @@ router.route('/seats/:id').put((req, res) => {
 router.route('/seats/:id').delete((req, res) => {
   const id = req.params.id;
 
-  const objIndex = db.seats.findIndex((obj => obj.id == id));
+  const objIndex = db.seats.findIndex((obj => obj.id.toString() == id));
   db.seats.splice(objIndex, 1);
 
   res.json({ message: 'OK' });
