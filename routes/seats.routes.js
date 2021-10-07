@@ -33,7 +33,9 @@ router.route('/seats').post((req, res) => {
       res.status(409).json({ message: 'This seat is already booked. Please select another one.' });
     } else {
       db.seats.push(obj);
+      req.io.emit('seatsUpdated', db.seats);
       res.json({ message: 'OK' });
+      console.log(db.seats);
     }
     
   } else {
