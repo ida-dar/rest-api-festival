@@ -2,7 +2,7 @@
   "license": "MIT",
   "version": "1.0.0",
   "engines": {
-    "node": "14.x"
+    "node": "14.17"
   },
   "scripts": {
     "start": "nodemon server.js",
