@@ -38,7 +38,6 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Not found...' });
 });
 
-
 const NODE_ENV = process.env.NODE_ENV;
 let dbUrl = '';
 const username = process.env.MONGO_USER;
