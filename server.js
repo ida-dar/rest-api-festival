@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 const app = express();
 
@@ -16,7 +17,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors());
+app.use(helmet());
+app.use(cors({
+  origin: 'https://sleepy-gorge-11274.herokuapp.com/'
+}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/api', testimonialsRoutes);
@@ -37,10 +41,12 @@ app.use((req, res) => {
 
 const NODE_ENV = process.env.NODE_ENV;
 let dbUrl = '';
+const username = process.env.MONGO_USER;
+const password = process.env.MONGO_PASS;
 
-if(NODE_ENV === 'production') dbUrl = 'url to remote db';
+if(NODE_ENV === 'production') dbUrl = `mongodb+srv://${username}:${password}@cluster0.pw3m4.mongodb.net/NewWaveDB?retryWrites=true&w=majority`;
 else if(NODE_ENV === 'test') dbUrl = 'mongodb://localhost:27017/NewWaveDBtest';
-else dbUrl = 'mongodb+srv://john-doe:mongoDB21@cluster0.pw3m4.mongodb.net/NewWaveDB?retryWrites=true&w=majority';
+else dbUrl = 'mongodb://localhost:27017/NewWaveDB';
 
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
