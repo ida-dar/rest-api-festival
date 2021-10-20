@@ -34,21 +34,30 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Not found...' });
 });
 
-mongoose.connect('mongodb+srv://john-doe:mongoDB21@cluster0.pw3m4.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+
+const NODE_ENV = process.env.NODE_ENV;
+let dbUrl = '';
+
+if(NODE_ENV === 'production') dbUrl = 'url to remote db';
+else if(NODE_ENV === 'test') dbUrl = 'mongodb://localhost:27017/NewWaveDBtest';
+else dbUrl = 'mongodb+srv://john-doe:mongoDB21@cluster0.pw3m4.mongodb.net/NewWaveDB?retryWrites=true&w=majority';
+
+mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
-  console.log('Connected to the database');
+  //console.log('Connected to the database');
 });
 db.on('error', err => console.log('Error ' + err));
 
 const server = app.listen(process.env.PORT || 8000, () => {
-  console.log('Server is running on port: 8000');
+  //console.log('Server is running on port: 8000');
 });
+
+module.exports = server;
 
 const io = socket(server);
 
 io.on('connection', (socket) => {
   console.log(`New socket, it's id: ${socket.id}`);
-
 });
