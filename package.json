@@ -7,7 +7,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "build": "cd client && yarn install && yarn build",
-    "test": "set NODE_ENV=test&& mocha \"./{,!(node_modules|client)/**/}*.test.js\" --timeout 4000",
+    "test": "snyk test && set NODE_ENV=test&& mocha \"./{,!(node_modules|client)/**/}*.test.js\" --timeout 4000",
     "test:watch": "onchange \"./**/*.js\" -i -k -- yarn test"
   },
   "dependencies": {
@@ -19,11 +19,13 @@
     "mocha": "9.1.2",
     "mongo-sanitize": "1.0.1",
     "mongodb": "3.3.2",
-    "mongoimport": "^1.0.6",
-    "mongoose": "5.7.1",
+    "mongoose": "5.13.9",
     "nodemon": "^2.0.14",
     "onchange": "6.1.0",
     "socket.io": "^4.3.1",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "snyk": "^1.744.0"
   }
 }
