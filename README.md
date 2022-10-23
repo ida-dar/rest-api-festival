@@ -1,8 +1,6 @@
 ### rest-api-festival
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-<br><br>
-A music festival website with a posibility to book tickets. Used technologies are listed below. You may visit the page [here](https://sleepy-gorge-11274.herokuapp.com/)
+A music festival website with a posibility to book tickets. Used technologies are listed below. You may visit the page [here](https://sleepy-gorge-11274.herokuapp.com/).
 <br>
 
 ## Used tech
