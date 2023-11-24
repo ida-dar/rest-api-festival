@@ -1,6 +1,6 @@
 ### rest-api-festival
 
-A music festival website with a posibility to book tickets. Used technologies are listed below. You may visit the page [here](https://master--newave-festival.netlify.app/).
+A music festival website with a posibility to book tickets. Used technologies are listed below.
 <br>
 
 ## Used tech
